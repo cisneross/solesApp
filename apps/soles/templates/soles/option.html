@@ -1,0 +1,5 @@
+        {% for s in shoeposts %}
+        <li><a href="/view/{{s.id}}">{{s.shoe_brand}} {{s.shoe_model}} by: {{s.user_post.user_name}}</a></li>
+        {% empty %}
+        <li> No matching results </li>
+        {% endfor %}

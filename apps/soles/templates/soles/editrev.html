@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/lux/bootstrap.min.css" rel="stylesheet" integrity="sha384-ML9h/UCooefre72ZPxxOHyjbrLT1xKV0AHON1J+OlOV2iwcYemqmWyMfTcfyzLJ1"
+        crossorigin="anonymous"> {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'soles/css/stylz.css' %}">
+    <script type="text/script" src="{% static 'soles/javascript/script.js' %}"></script>
+    <title>Edit Review</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" > Soles</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/review">Review</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Log out</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" id="myForm" action="/find_shoes" method="POST">
+                {% csrf_token %}
+                <input class="form-control mr-sm-2" name="shoesearch" list="shoes" id="search" type="text" placeholder="Search Shoes">
+                <div id="placeholder" class="myUL">
+                </div>
+                <!-- <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button> -->
+            </form>
+        </div>
+    </nav>
+    <!-- under ther nav -->
+    <br>
+    <div class="container">
+        <h1>Edit Review</h1>
+        <div class="container">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <form action="/update/{{rev.id}}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label class="col-form-label" for="inputDefault">Shoe Brand</label>
+                <input type="text" name="brand" class="form-control" placeholder="Brand(Nike SB, Vans, Emerica, etc)"
+                    id="inputDefault" value="{{rev.shoe_brand}}">
+            </div>
+            <div class="form-group">
+                <label class="col-form-label" for="inputDefault">Shoe Model</label>
+                <input type="text" name="model" class="form-control" placeholder="Model(Janoskis, Old Schools, Reynolds G6, etc)"
+                    id="inputDefault" value="{{rev.shoe_model}}">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile">Image Input</label>
+                <input type="file" name="imagenew" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" >
+                <small id="fileHelp" class="form-text text-muted">Upload an image of the current physical status of your shoes!</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleSelect1">Recommend</label>
+                <select class="form-control" name="rec" id="exampleSelect1">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="col-form-label" for="inputDefault">Puchase URL Link</label>
+                <input type="text" name="link" class="form-control" placeholder="Link" id="inputDefault" value="{{rev.purchase_link}}">
+            </div>
+            <div class="form-group">
+                <label class="col-form-label" for="inputDefault">Life Span</label>
+                <input type="text" name="life" class="form-control" placeholder="How many weeks did you skate the pair of shoes for?"
+                    id="inputDefault" value="{{rev.life_span}}">
+            </div>
+            <div class="form-group">
+                <label for="exampleTextarea">Write Review</label>
+                <textarea class="form-control" name="review" placeholder="How was the flick? How were the insoles? Cupsole or Vulcanized? etc..."
+                    id="exampleTextarea" rows="5">{{rev.content}}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+        //   $('#myForm').submit(function(e){
+        //         e.preventDefault();
+        //     })
+        $('#search').keyup(function () {
+            console.log('hey Im searching');
+            $.ajax({
+                url: '/find_shoes',
+                method: 'post',
+                data: $(this).parent().serialize(),
+                success: function (response) {
+                    console.log(response);
+                    $('#placeholder').html(response)
+                }
+            })
+        });
+    </script>
+</body>
+
+</html>

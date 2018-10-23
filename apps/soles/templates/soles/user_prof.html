@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/lux/bootstrap.min.css" rel="stylesheet" integrity="sha384-ML9h/UCooefre72ZPxxOHyjbrLT1xKV0AHON1J+OlOV2iwcYemqmWyMfTcfyzLJ1"
+        crossorigin="anonymous"> {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'soles/css/stylz.css' %}">
+    <title>User Profile</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand"> Soles</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard">Home </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/review">Review</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Log out</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" id="myForm" action="/find_shoes" method="POST">
+                {% csrf_token %}
+                <input class="form-control mr-sm-2" name="shoesearch" list="shoes" id="search" type="text" placeholder="Search Shoes">
+                <div id="placeholder" class="myUL" style="z-index:2;">
+                </div>
+                <!-- <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button> -->
+            </form>
+        </div>
+    </nav>
+    <br>
+    <!-- under the nav -->
+    <div class="container">
+        <h1>{{u.user_name}}'s Profile</h1>
+        <div class="card border-primary mb-3" style="max-width: 100%;">
+            <div class="card-header">{{u.user_name}}</div>
+            <div class="card-body">
+                <h4 class="card-title">Name: {{u.first_name}} {{u.last_name}}</h4>
+                <h6 class="card-subtitle mb-2 text-muted">Email: {{u.email}}</h6>
+                <p class="card-text">Favorite Skater: {{u.fav_skater}} </p>
+                <p class="card-text">Favorite Shoe: {{u.fav_shoe}} </p>
+                <a href="/profile/edit" class="card-link">Edit Profile</a>
+                <a href="/dashboard" class="card-link">Home</a>
+            </div>
+        </div>
+        <!-- reviews -->
+        <h4>Your Reviews</h4>
+        {% for r in reviews %}
+        <!-- <div class="col"> -->
+        <div class="card mb-3">
+            <h3 class="card-header">Review</h3>
+            <div class="card-body">
+                <h5 class="card-title">Brand: {{r.shoe_brand}}</h5>
+                <h6 class="card-subtitle text-muted">Model: {{r.shoe_model}}</h6>
+            </div>
+            <img style="height: 200px; width: 330px; display: block; margin-left: 20px;" src="{{r.post_pic.url}}" alt="Shoe image">
+            <div class="card-body">
+                <p class="card-text">Review: {{r.content}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Purchase Link: <a href="{{r.purchase_link}}" target="blank">Here</a>
+                </li>
+                <li class="list-group-item">Life Span: {{r.life_span}} weeks </li>
+                <li class="list-group-item">Recommend: {{r.recommend}} </li>
+            </ul>
+            <div class="card-body">
+                <a href="/view/{{r.id}}" class="card-link">View Post</a>
+                {% if r.user_post.id == request.session.user_id %}
+                <a href="/edit/{{r.id}}" class="card-link">Edit Post</a>
+                <a href="/delete/{{r.id}}" class="card-link">Delete Post</a>
+                {% endif %}
+            </div>
+            <div class="card-footer text-muted">
+                <p>Posted on: {{r.created_at}}</p>
+            </div>
+        </div>
+        <!-- </div> -->
+        {% endfor %}
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+        //   $('#myForm').submit(function(e){
+        //         e.preventDefault();
+        //     })
+        $('#search').keyup(function () {
+            console.log('hey Im searching');
+            $.ajax({
+                url: '/find_shoes',
+                method: 'post',
+                data: $(this).parent().serialize(),
+                success: function (response) {
+                    console.log(response);
+                    $('#placeholder').html(response)
+                }
+            })
+        });
+    </script>
+</body>
+
+</html>

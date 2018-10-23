@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css"> 
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'soles/css/stylesone.css' %}">
+    <title>Join homie</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box">
+            <div class="sub-box">
+                <h1>
+                    <a href="/">Soles</a>
+                </h1>
+            </div>
+        </div>
+        <div class="container">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %}  class="msg" class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <div class="row">
+            <div class="hbox">
+                <h5>Register</h5>
+            </div>
+            <div class="hbox">
+                <h5>Login</h5>
+            </div>
+        </div>
+        <!-- Register form -->
+        <div class="center-boxes">
+            <div class="row">
+                <form action="/validate" class="col s12" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="firstname" name="first_name" type="text" class="validate" style="color:white;">
+                            <label for="firstname">First Name</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="lastname" name="last_name" type="text" class="validate" style="color:white;">
+                            <label for="lastname">Last Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="username" name="user_name" type="text" class="validate" style="color:white;">
+                            <label for="username">User Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="email" name="email" type="email" class="validate" style="color:white;">
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="password" name="password" type="password" class="validate" style="color:white;">
+                            <label for="password">Password</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="pwconfirm" name="confirmpw" type="password" class="validate" style="color:white;">
+                            <label for="pwconfirm">Confirm Password</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button class="transparent_btn transparent_btng">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Login form -->
+        <div class="center-boxes">
+            <div class="row">
+                <form action="/log" class="col s12" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="emails" name="emaillog" type="email" class="validate" style="color:white;">
+                            <label for="emails">Email</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="passwords" name="pwlog" type="password" class="validate" style="color:white;">
+                            <label for="passwords">Password</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button class="transparent_btn transparent_btng">Log in</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

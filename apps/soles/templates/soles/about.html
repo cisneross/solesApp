@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/lux/bootstrap.min.css" rel="stylesheet" integrity="sha384-ML9h/UCooefre72ZPxxOHyjbrLT1xKV0AHON1J+OlOV2iwcYemqmWyMfTcfyzLJ1"
+        crossorigin="anonymous"> {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'soles/css/stylz.css' %}">
+    <title>About</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand"> Soles</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/review">Review</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Log out</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" id="myForm" action="/find_shoes" method="POST">
+                {% csrf_token %}
+                <input class="form-control mr-sm-2" name="shoesearch" list="shoes" id="search" type="text" placeholder="Search Shoes">
+                <div id="placeholder" class="myUL">
+                </div>
+                <!-- <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button> -->
+            </form>
+        </div>
+    </nav>
+    <!-- under the nav bar -->
+    <br>
+    <div class="container">
+        <h1>About Soles</h1>
+        <p>Soles was created by skateboarder Sergio D. Cisneros.</p>
+        <p>More importantly, it is a platform/community for skateboarders to come and share personal experiences with a variety of skate shoes. It is also a great community resource to decide what pair of shoes you should cop next. Soles knows how integral of a role shoes play in our skateboarding careers, so whether you're looking for performance, style, or shoes somwhere in the middle, let our community help guide your decision.</p>
+        {% load static %}
+        <img style="width: 100%;" src="{% static 'soles/images/reflection.jpg' %}" />
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        //   $('#myForm').submit(function(e){
+        //         e.preventDefault();
+        //     })
+        $('#search').keyup(function () {
+            console.log('hey Im searching');
+            $.ajax({
+                url: '/find_shoes',
+                method: 'post',
+                data: $(this).parent().serialize(),
+                success: function (response) {
+                    console.log(response);
+                    $('#placeholder').html(response)
+                }
+            })
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,221 @@
+html { 
+    background: url(../images/bg.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+  .msg{
+    color: rgb(255, 92, 92);
+  }
+  a{
+    color: #ffffff; 
+  }
+  h1 { 
+    color: rgb(255, 255, 255); 
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 40px; 
+    font-weight: lighter; 
+    line-height: 32px; 
+    margin: 10px 0 72px; 
+    text-align: center; 
+  }
+  .box{
+    width: 100%;
+    height: 100px;
+    margin-top: 30px;
+  }
+  .sub-box{
+    border-style: solid;
+    border-color: white;
+    width: 130px;
+    height:60px;
+    border-width: 2px;
+  }
+  .center-boxes{
+    vertical-align: top;
+    border-color: rgb(255, 255, 255);
+    display: inline-block;
+    border-style: solid;
+    width: 400px;
+    height:500px;
+    border-width: 2px;
+  }
+.transparent_btn {
+  margin-left: 10px;
+	display: inline-block;
+	padding: 10px 14px;
+	color: #FFF;
+	border: 1px solid #FFF;
+	text-decoration: none;
+	font-size: 14px;
+	line-height: 120%;
+	background-color: rgba(255,255,255, 0);
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-transition: background-color 300ms ease;
+	-moz-transition: background-color 300ms ease;
+	transition: background-color 300ms ease;
+	cursor: pointer;
+}
+.transparent_btn:hover {
+  background-color: rgba(255,255,255, 0.3);
+  border: 1.2px solid rgb(0, 173, 204);
+	color: rgb(0, 173, 204);
+}
+
+.transparent_btng{
+	color: #9ff4ff;
+	border-color :#9ff4ff;
+}
+@media only screen and (max-width: 480px){
+  a{
+    color: #ffffff; 
+  }
+  h1 { 
+    color: rgb(255, 255, 255); 
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 40px; 
+    font-weight: lighter; 
+    line-height: 32px; 
+    margin: 10px 0 72px; 
+    text-align: center; 
+  }
+  h5{
+    color: rgb(255, 255, 255); 
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 10px; 
+    line-height: 20px; 
+    margin: 10px 0 72px; 
+    display: inline-block;
+  }
+  .sub-box{
+    border-style: solid;
+    border-color: #ffffff;
+    width: 130px;
+    height:60px;
+    border-width: 2px;
+  }
+  .center-boxes{
+    vertical-align: top;
+    border-color: #ffffff ;
+    display: inline-block;
+    border-style: solid;
+    width: 100%;
+    height:100%;
+    border-width: 2px;
+  }
+  .hbox{
+    vertical-align: top;
+    display: inline-block;
+    width: 100%;
+    height:50px;
+    border-width: 2px;
+  }
+  /* label color */
+  .input-field label {
+    color: rgb(255, 255, 255);
+  }
+  /* label focus color */
+  .input-field input[type=text]:focus + label {
+    color: rgb(255, 255, 255);
+  }
+  /* label underline focus color */
+  .input-field input[type=text]:focus {
+    border-bottom: 1px solid rgb(255, 255, 255);
+    box-shadow: 0 1px 0 0 rgb(0, 0, 0);
+  }
+  /* valid color */
+  .input-field input[type=text].valid {
+    border-bottom: 1px solid rgb(255, 255, 255);
+    box-shadow: 0 1px 0 0 #000;
+  }
+  /* invalid color */
+  .input-field input[type=text].invalid {
+    border-bottom: 1px solid rgb(255, 255, 255);
+    box-shadow: 0 1px 0 0 #000;
+  }
+  /* icon prefix focus color */
+  .input-field .prefix.active {
+    color: rgb(255, 255, 255);
+  }
+}
+@media only screen and (min-width: 481px){
+  a{
+    color: #ffffff; 
+  }
+  h1 { 
+    color: rgb(255, 255, 255); 
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 40px; 
+    font-weight: lighter; 
+    line-height: 32px; 
+    margin: 10px 0 72px; 
+    text-align: center; 
+  }
+  h5{
+    color: rgb(255, 255, 255); 
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 10px; 
+    font-size:40px;
+    line-height: 20px; 
+    margin: 10px 0 72px; 
+    display: inline-block;
+  }
+  .sub-box{
+    border-style: solid;
+    border-color:#ffffff;
+    width: 130px;
+    height:60px;
+    border-width: 2px;
+  }
+  .center-boxes{
+    vertical-align: top;
+    border-color:#ffffff ;
+    display: inline-block;
+    border-style: solid;
+    width: 49%;
+    height:50%;
+    border-width: 2px;
+  }
+  .hbox{
+    vertical-align: top;
+    display: inline-block;
+    width: 49%;
+    height:50px;
+    border-width: 2px;
+  }
+    /* label color */
+    .input-field label {
+      color: rgb(255, 255, 255);
+    }
+    /* label focus color */
+    .input-field input[type=text]:focus + label {
+      color: rgb(255, 255, 255);
+    }
+    /* label underline focus color */
+    .input-field input[type=text]:focus {
+      border-bottom: 1px solid rgb(255, 255, 255);
+      box-shadow: 0 1px 0 0 rgb(0, 0, 0);
+    }
+    /* valid color */
+    .input-field input[type=text].valid {
+      border-bottom: 1px solid rgb(255, 255, 255);
+      box-shadow: 0 1px 0 0 #000;
+    }
+    /* invalid color */
+    .input-field input[type=text].invalid {
+      border-bottom: 1px solid rgb(255, 255, 255);
+      box-shadow: 0 1px 0 0 #000;
+    }
+    /* icon prefix focus color */
+    .input-field .prefix.active {
+      color: rgb(255, 255, 255);
+    }
+}
+
+
+
+
+  
